@@ -18,7 +18,6 @@
                   <p class="property footer">{{t.assign}}</p>
                   <button @click='pindahKeProgress(t[".key"])'>done</button>
                   <button @click='removeTask(t[".key"])'>remove</button>
-                  <button @click="editTask(t['.key'])">edit</button>
                 </div>
               </div>
             </div>
@@ -41,7 +40,7 @@
                   <p class="property footer">{{t.assign}}</p>
                   <button @click='pindahKeTesting(t[".key"])'>done</button>
                   <button @click='removeTask(t[".key"])'>remove</button>
-                  <button @click="editTask(t['.key'])">edit</button>
+                  <button @click="balikKeLog(t['.key'])">back</button>
                 </div>
               </div>
             </div>
@@ -64,7 +63,7 @@
                   <p class="property footer">{{t.assign}}</p>
                   <button @click='pindahKeDone(t[".key"])'>done</button>
                   <button @click='removeTask(t[".key"])'>remove</button>
-                  <button @click="editTask(t['.key'])">edit</button>
+                  <button @click="balikKeProgress(t['.key'])">back</button>
                 </div>
               </div>
             </div>
@@ -86,7 +85,7 @@
                 <div class="kanban-task-footer">
                   <p class="property footer">{{t.assign}}</p>
                   <button @click='removeTask(t[".key"])'>remove</button>
-                  <button @click="editTask(t['.key'])">edit</button>
+                  <button @click="balikKeTesting(t['.key'])">back</button>
                 </div>
               </div>
             </div>
@@ -133,9 +132,18 @@ export default {
       namesRef.child(key).remove()
     },
 
-    editTask: function(key) {
-      namesRef.child(key).update()
+    balikKeTesting: function(key) {
+      namesRef.child(key).update({status: 'testing'})
+    },
+
+    balikKeProgress: function(key) {
+      namesRef.child(key).update({status: 'in progress'})
+    },
+
+    balikKeLog: function(key) {
+      namesRef.child(key).update({status: 'backlog'})
     }
+
   },
 
   components: {
